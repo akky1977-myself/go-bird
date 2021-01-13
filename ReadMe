@@ -1,0 +1,77 @@
+How to install go 
+macOS package installer (If you need to install go)
+url: https://golang.org/doc/install#:~:text=macOS%20package%20installer,in%20your%20PATH%20environment%20variable.
+
+The package should put the /usr/local/go/bin
+$ export GOPATH=/usr/local/go/bin
+** need to restart your terminal
+
+$ cd 
+
+$ mkdir <project _name>
+
+$ cd <project_name>
+
+$ touch main.go
+
+package main
+
+import (
+    "fmt"
+    "net/http"
+)
+
+func main() {
+    fmt.Println("Go Docker-compose Tutorial")
+
+    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprintf(w, "sever is running!")
+    })
+
+    http.ListenAndServe(":7070", nil)
+}
+
+Web address
+http://localhost:7075/
+
+MakeFile
+
+$ touch makefile
+
+dev:
+	go build main.go
+	go run main.go
+
+restart:
+	docker-compose down
+	docker-compose up --build -d
+
+Now you can run like
+
+$ make dev
+
+Create GoMod
+
+$ cd <project root folder>
+
+create go mode file
+$ go mod init github.com/<git user name>/<project_name>>
+
+** so you can run go as 
+$ go run github.com/akky/web_tutorial
+
+Using .env file 
+
+Install library
+
+$ go get github.com/joho/godotenv
+
+create .env file
+
+example in here https://towardsdatascience.com/use-environment-variable-in-your-next-golang-project-39e17c3aaa66
+
+Testing
+
+Go to root directory where main_test.go lives
+
+$ go test ./...
